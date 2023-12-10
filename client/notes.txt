@@ -1,0 +1,3 @@
+* in home.css we specify the divsion q part for the profile
+  post and rightside 
+  using Grid-template
