@@ -19,7 +19,7 @@ const FollowerCard = () => {
               </div>
                 
             </div>
-            <button className="button">follow</button>
+            <button className="button fc-button">Follow</button>
             
           </div>
         );
