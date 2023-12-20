@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState,useRef}from "react";
 import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
@@ -7,6 +7,16 @@ import { UilLocationPoint } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 
 const PostShare = () => {
+
+  const [image,setImage] = useState(null)
+  const imageRef = useRef()
+  const onImageChange =(event)=>{
+    if(event.target.files && event.target.files[0]){
+      let img = event.target.files[0];
+    }
+    
+  }
+
   return (
     <div className="PostShare">
       <img src={ProfileImage} alt="" />
@@ -30,8 +40,12 @@ const PostShare = () => {
             <UilSchedule />
             Shedule
           </div>
-        
+        <button className="button ps-button">Share</button>
+        <div style={{display:"none"}}>
+          <input type="file" name="myImage" ref={imageRef} onChange={onImageChange} />
         </div>
+        </div>
+
       </div>
     </div>
   );
