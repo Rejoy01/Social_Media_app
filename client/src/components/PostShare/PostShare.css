@@ -36,6 +36,23 @@
 }
 
 
+.previewImage{
+    position: relative;
+}
+
+.previewImage>svg{
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.previewImage>img{
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
 
 .postOptions{
     display: flex;
