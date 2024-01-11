@@ -1,12 +1,12 @@
 import React from 'react'
-import "./InfoCard"
+import "./InfoCard.css"
 import {UilPen} from '@iconscout/react-unicons'
 
 
 const InfoCard = () => {
   return (
     <div className='InfoCard'>
-      <div className="infHead">
+      <div className="infoHead">
         <h4>Your info</h4>
         <UilPen />
       </div>
@@ -32,7 +32,7 @@ const InfoCard = () => {
         <span>IT</span>
       </div>
 
-    <button className='button'>
+    <button className='button '>
         Logout
     </button>
 
