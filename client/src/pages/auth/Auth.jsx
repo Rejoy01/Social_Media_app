@@ -12,15 +12,37 @@ const Auth = () => {
           <h6>Explore the ideas throughout the World</h6>
         </div>
       </div>
-      <SignUp />
+      <Login />
     </div>
   );
 };
 
+function Login() {
+    return (
+      <div className="a-right">
+        <form className="infoForm authForm">
+          <h3>Login </h3>
+          
+          <div>
+              <input type="text" name="username" className="infoInput" placeholder="usenrame"/>
+          </div>
+          <div>
+              <input type="text" className="infoInput" name="password" placeholder="password" />
+              
+          </div>
+          
+          <button className="button infoButton" type="submit">Signup</button>
+        </form>
+      </div>
+    );
+  }
+  
+
+
 function SignUp() {
   return (
     <div className="a-right">
-      <form className="infoForm">
+      <form className="infoForm authForm">
         <h3>Sign up</h3>
         <div>
           <input
@@ -36,6 +58,17 @@ function SignUp() {
             name="lastname"
           />
         </div>
+        <div>
+            <input type="text" name="username" className="infoInput" placeholder="usenrame"/>
+        </div>
+        <div>
+            <input type="text" className="infoInput" name="password" placeholder="password" />
+            <input type="text" className="infoInput" name="confirmpassword" placeholder="Confirm Password" />
+        </div>
+        <div>
+            <span style={{fontSize:'12px'}}>Already have an account . Login</span>
+        </div>
+        <button className="button infoButton" type="submit">Signup</button>
       </form>
     </div>
   );
