@@ -8,31 +8,34 @@ const InfoCard = () => {
     <div className='InfoCard'>
       <div className="infoHead">
         <h4>Your info</h4>
-        <UilPen />
+        <div>
+        <UilPen width='2rem' height='1.2rem'/>
+        </div>
+        
       </div>
 
       <div className="info">
         <span>
-            <b>Status</b>
+            <b>Status </b>
         </span>
         <span>in Relationships</span>
       </div>
 
       <div className="info">
         <span>
-            <b>Lives in</b>
+            <b>Lives in </b>
         </span>
         <span>Multan</span>
       </div>
 
       <div className="info">
         <span>
-            <b>Works at</b>
+            <b>Works at </b>
         </span>
         <span>IT</span>
       </div>
 
-    <button className='button '>
+    <button className='button logout-button'>
         Logout
     </button>
 
