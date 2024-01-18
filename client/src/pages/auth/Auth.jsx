@@ -12,7 +12,7 @@ const Auth = () => {
           <h6>Explore the ideas throughout the World</h6>
         </div>
       </div>
-      <Login />
+      <SignUp />
     </div>
   );
 };
