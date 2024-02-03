@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import dotevn from 'dotenv'
 //routes
 import AuthRoute from './Routes/AuthRoutes.js'
-
+import UserRoute from './Routes/UserRoutes.js'
 
 const PORT = process.env.PORT
 const app = express();
@@ -26,5 +26,7 @@ mongoose
   //usage of route
   
 app.use('/auth',AuthRoute)
+
+app.use("/user",UserRoute)
 
 

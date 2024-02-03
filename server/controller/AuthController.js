@@ -35,7 +35,8 @@ export const loginUser = async(req,res)=>{
     if(user){
 
       const validate = await bcrpyt.compare(password,user.password)
-      validate ? res.status(400).json(user) : res.status(404).json("Wrong Password")
+
+      validate ? res.status(200).json(user) : res.status(404).json("Wrong Password")
 
     }
     else{
