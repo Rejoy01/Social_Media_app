@@ -20,6 +20,7 @@ export const GetUser = async (req, res) => {
   }
 };
 
+//update a user
 export const updateUser = async(req,res)=>{
     const id=req.params.id
     const {currentUserId,currentUserAdminStatus,password} = req.body
@@ -39,6 +40,22 @@ export const updateUser = async(req,res)=>{
         
     }
     else{
+        res.status(403).send('Access Denied ! you can only update your own profile')
+    }
+}
+
+//Delete User
+export const deleteUser = async (req , res ) => {
+    let id = req.params.id;
+    const {currentUserId,currentUserAdminStatus} = req.body
+    if(currentUserId === id || currentUserAdminStatus){
+        try {
+            await UserModel.findByIdAndDelete(id)
+            res.status(200).json("User Deleted successfully")
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }else{
         res.status(403).send('Access Denied ! you can only update your own profile')
     }
 }
