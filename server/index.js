@@ -1,14 +1,30 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import dotevn from 'dotenv'
+//routes
+import AuthRoute from './Routes/AuthRoutes.js'
 
+
+const PORT = process.env.PORT
 const app = express();
-app.use(express.json());
+
+
+
+//middleware
+app.use(bodyParser.json({limit:"30mb",extended:true}))
+app.use(bodyParser.urlencoded({limit:"30mb",extended:true}))
+dotevn.config()
 
 mongoose
   .connect(
-    "mongodb+srv://rejowilson:RejoyWilSon@cluster0.harjfus.mongodb.net/SocialMedia?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    process.env.MONGO_DB
   )
-  .then(() => app.listen(5000, () => console.log("listening")))
-  .catch(() => console.log("error in connecting db"));
+  .then(() => app.listen(process.env.PORT, () => console.log(`listening at ${process.env.PORT}`)))
+  .catch((error)=>console.log(error))
+
+  //usage of route
+  
+app.use('/auth',AuthRoute)
+
+
