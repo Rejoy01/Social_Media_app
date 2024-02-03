@@ -28,7 +28,7 @@ const UserSchema = mongoose.Schema(
   livesin:String,
   worksAt: String,
   relationship: String,
-  followers :{},
+  followers :[],
   following:[]
 },{
     timestamps: true // Automatically create createdAt and updatedAt properties
