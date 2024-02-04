@@ -59,3 +59,30 @@ export const deleteUser = async (req , res ) => {
         res.status(403).send('Access Denied ! you can only update your own profile')
     }
 }
+
+//Follow a User 
+export const followUser = async(req,res) =>{
+    const id = req.params.id
+
+    const { currentUserId} = req.body
+
+    if (currentUserId ===id) {
+        res.status(403).json("Action Forbidden")
+    }
+    else{
+        try {
+            const followUser = await UserModel.findById(id)
+            const followingUser = await UserModel.findById(currentUserId)
+            if (!followUser.followers.includes(currentUserId)) {
+                await followUser.updateOne({$push :{followers:currentUserId}})
+                await followingUser.updateOne({$push :{following:id}})
+                res.status(200).json("User Followed")
+            }else{
+                res.status(403).json("User is Already followed by you")
+            }
+
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+}
