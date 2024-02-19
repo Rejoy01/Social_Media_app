@@ -33,12 +33,18 @@ export const getPost = async(req,res)=> {
 
 export const  updatePost = async(req,res)=>{
     const id =  req.params.id
+    const {userId} = req.body
     try{
-        const post = await PostModel.findByIdAndUpdate(id,req.body,{new:true})
-        res.status(200).json(post)
+        const post = await PostModel.findById(id)
+        if (post.userId === userId) {
+            await post.updateOne({$set :req.body})
+            res.status(200).json(post)
+        }else{
+            res.status(403).json("Action forbidden")
+        }
+        
     }catch(error){
         res.status(500).json(error)
     }
-    
-
 }
+
