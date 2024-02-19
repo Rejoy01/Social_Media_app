@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const postSchema = mongoose.Model({
+const postSchema = mongoose.Schema({
     userId :{type:String ,required : true },
     desc:String,
     likes:[],
@@ -11,6 +11,6 @@ const postSchema = mongoose.Model({
 }
 )
 
-const PostModel = mongoose.model("Post",postSchema)
+const PostModel = mongoose.model("Posts",postSchema)
 
 export default PostModel
