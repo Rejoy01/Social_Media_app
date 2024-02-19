@@ -28,3 +28,17 @@ export const getPost = async(req,res)=> {
         res.status(500).json(error)
     }
 }
+
+//update post
+
+export const  updatePost = async(req,res)=>{
+    const id =  req.params.id
+    try{
+        const post = await PostModel.findByIdAndUpdate(id,req.body,{new:true})
+        res.status(200).json(post)
+    }catch(error){
+        res.status(500).json(error)
+    }
+    
+
+}
