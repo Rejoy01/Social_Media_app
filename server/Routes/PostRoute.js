@@ -1,11 +1,9 @@
 import express from "express"
-import { createPost } from "../controller/PostController.js"
+import { createPost, getPost } from "../controller/PostController.js"
 
 const router = express.Router()
 
-router.get("/",async(req,res)=>{
-    res.send("Post Route")
-})
+router.get("/:id",getPost)
 
 router.post("/",createPost)
 

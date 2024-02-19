@@ -14,3 +14,17 @@ export const createPost = async(req,res)=>{
     }
 
 }
+
+// Get a Post
+
+export const getPost = async(req,res)=> {
+    const id = req.params.id
+
+    try {
+        const Post = await PostModel.findById(id)
+        res.status(200).json(Post)
+        
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
