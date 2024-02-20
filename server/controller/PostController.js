@@ -55,6 +55,7 @@ export const deletePost =async(req,res)=>{
         const post = await PostModel.findById(id)
         if (post.userId === userId) {
             await post.deleteOne();
+            res.status(200).json("post deleted Successfully")
         }else{
             res.status(403).json("Action forbidden")
         }
