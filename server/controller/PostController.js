@@ -1,4 +1,5 @@
 import PostModel from "../model/postModel.js";
+import UserModel from "../model/UserModel.js";
 import mongoose from "mongoose";
 
 //create new post
@@ -80,6 +81,49 @@ export const likePost =async(req,res)=>{
             res.status(200).json("post Disliked ")
         }
     } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+// get Timeline Posts
+
+export const getTimeLinePosts = async(req, res)=>{
+    const userId = req.params.id
+
+    try {
+        const currentUserPost = await PostModel.find({userId:userId})
+        //aggreation pipeline contains array of steps
+        //1st step is matching step
+        const FollowingPost = await UserModel.aggregate([
+            {
+                $match:{
+                    //convert userId to ObjectId Type
+                    _id : new mongoose.Types.ObjectId(userId)
+                }
         
+            },
+            {   
+                //query inside userModel ANd results from postModel
+                //integrate PostModel while remaining inside the user model
+                $lookup:{
+                    from:"posts",
+                    localField:"following",
+                    foreignField:"userId",
+                    as: "followingPosts"
+                }
+            },
+            {
+                //which fields to return as the result of aggreation
+                $project:{
+                    followingPosts:1,
+                    _id : 0
+
+                }
+            }
+        ])
+        res.status(200).json(currentUserPost.concat(FollowingPost))
+        
+    } catch (error) {
+        res.status(500).json(error)
     }
 }
