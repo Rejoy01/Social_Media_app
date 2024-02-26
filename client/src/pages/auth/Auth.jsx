@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import Logo from "../../img/logo.png";
 
 const Auth = () => {
+  const [isSignUp,setIsSignUp] = useState(false)
+  
   return (
     <div className="Auth">
+      {/* Left Side */}
       <div className="a-left">
         <img src={Logo} alt="" />
         <div className="Webname">
@@ -12,32 +15,90 @@ const Auth = () => {
           <h6>Explore the ideas throughout the World</h6>
         </div>
       </div>
-      <SignUp />
+      {/* Right Side */}
+      <div className="a-right">
+        <form className="infoForm authForm">
+          <h3>Sign up</h3>
+          <div>
+            <input
+              type="text"
+              className="infoInput"
+              placeholder="Firstname"
+              name="firstname"
+            />
+            <input
+              type="text"
+              className="infoInput"
+              placeholder="LastName"
+              name="lastname"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="username"
+              className="infoInput"
+              placeholder="usenrame"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              className="infoInput"
+              name="password"
+              placeholder="password"
+            />
+            <input
+              type="text"
+              className="infoInput"
+              name="confirmpassword"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div>
+            <span style={{ fontSize: "12px" }}>
+              Already have an account . Login
+            </span>
+          </div>
+          <button className="button infoButton" type="submit">
+            Signup
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
 function Login() {
-    return (
-      <div className="a-right">
-        <form className="infoForm authForm">
-          <h3>Login </h3>
-          
-          <div>
-              <input type="text" name="username" className="infoInput" placeholder="usenrame"/>
-          </div>
-          <div>
-              <input type="text" className="infoInput" name="password" placeholder="password" />
-              
-          </div>
-          
-          <button className="button infoButton" type="submit">Signup</button>
-        </form>
-      </div>
-    );
-  }
-  
+  return (
+    <div className="a-right">
+      <form className="infoForm authForm">
+        <h3>Login </h3>
 
+        <div>
+          <input
+            type="text"
+            name="username"
+            className="infoInput"
+            placeholder="usenrame"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            name="password"
+            placeholder="password"
+          />
+        </div>
+
+        <button className="button infoButton" type="submit">
+          Signup
+        </button>
+      </form>
+    </div>
+  );
+}
 
 function SignUp() {
   return (
@@ -59,16 +120,35 @@ function SignUp() {
           />
         </div>
         <div>
-            <input type="text" name="username" className="infoInput" placeholder="usenrame"/>
+          <input
+            type="text"
+            name="username"
+            className="infoInput"
+            placeholder="usenrame"
+          />
         </div>
         <div>
-            <input type="text" className="infoInput" name="password" placeholder="password" />
-            <input type="text" className="infoInput" name="confirmpassword" placeholder="Confirm Password" />
+          <input
+            type="text"
+            className="infoInput"
+            name="password"
+            placeholder="password"
+          />
+          <input
+            type="text"
+            className="infoInput"
+            name="confirmpassword"
+            placeholder="Confirm Password"
+          />
         </div>
         <div>
-            <span style={{fontSize:'12px'}}>Already have an account . Login</span>
+          <span style={{ fontSize: "12px" }}>
+            Already have an account . Login
+          </span>
         </div>
-        <button className="button infoButton" type="submit">Signup</button>
+        <button className="button infoButton" type="submit">
+          Signup
+        </button>
       </form>
     </div>
   );
