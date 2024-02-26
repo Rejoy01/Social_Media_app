@@ -3,8 +3,10 @@ import "./Auth.css";
 import Logo from "../../img/logo.png";
 
 const Auth = () => {
-  const [isSignUp,setIsSignUp] = useState(false)
-  
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  const [data,setData] = useState([]);
+
   return (
     <div className="Auth">
       {/* Left Side */}
@@ -18,21 +20,25 @@ const Auth = () => {
       {/* Right Side */}
       <div className="a-right">
         <form className="infoForm authForm">
-          <h3>Sign up</h3>
-          <div>
-            <input
-              type="text"
-              className="infoInput"
-              placeholder="Firstname"
-              name="firstname"
-            />
-            <input
-              type="text"
-              className="infoInput"
-              placeholder="LastName"
-              name="lastname"
-            />
-          </div>
+          <h3>{isSignUp ? "Sign Up" : "Log In"}</h3>
+
+          {isSignUp && (
+            <div>
+              <input
+                type="text"
+                className="infoInput"
+                placeholder="Firstname"
+                name="firstname"
+              />
+              <input
+                type="text"
+                className="infoInput"
+                placeholder="LastName"
+                name="lastname"
+              />
+            </div>
+          )}
+
           <div>
             <input
               type="text"
@@ -48,20 +54,23 @@ const Auth = () => {
               name="password"
               placeholder="password"
             />
-            <input
-              type="text"
-              className="infoInput"
-              name="confirmpassword"
-              placeholder="Confirm Password"
-            />
+            {isSignUp && (
+              <input
+                type="text"
+                className="infoInput"
+                name="confirmpassword"
+                placeholder="Confirm Password"
+              />
+            )}
           </div>
           <div>
-            <span style={{ fontSize: "12px" }}>
-              Already have an account . Login
+            <span style={{ fontSize: "12px" ,cursor:"pointer"}} onClick={()=>setIsSignUp((prev)=>!prev)}>
+            { isSignUp ? "Already have an account . Login!" :"Don't Have an account? Sign Up"}
+              
             </span>
           </div>
           <button className="button infoButton" type="submit">
-            Signup
+          { isSignUp ? "Sign up" :"Log in"}
           </button>
         </form>
       </div>
