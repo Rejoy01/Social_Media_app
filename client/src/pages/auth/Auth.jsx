@@ -5,7 +5,37 @@ import Logo from "../../img/logo.png";
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const [data,setData] = useState([]);
+  const [data, setData] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
+    confirmpassword: "",
+  });
+
+  const [confirmPassword, setConfirmPassword] = useState(true);
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+    console.log(data);
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignUp) {
+      data.password !== data.confirmpassword && setConfirmPassword(false)
+    }
+  }
+
+  const resetForm =()=>{
+    setConfirmPassword(true)
+    setData({ firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
+    confirmpassword: "",})
+  }
 
   return (
     <div className="Auth">
@@ -19,58 +49,75 @@ const Auth = () => {
       </div>
       {/* Right Side */}
       <div className="a-right">
-        <form className="infoForm authForm">
+        <form className="infoForm authForm" onSubmit={handleSubmit}>
           <h3>{isSignUp ? "Sign Up" : "Log In"}</h3>
 
           {isSignUp && (
             <div>
               <input
+                onChange={handleChange}
                 type="text"
                 className="infoInput"
                 placeholder="Firstname"
                 name="firstname"
+                value={data.firstname}
               />
               <input
+                onChange={handleChange}
                 type="text"
                 className="infoInput"
                 placeholder="LastName"
                 name="lastname"
+                value={data.lastname}
               />
             </div>
           )}
 
           <div>
             <input
+              onChange={handleChange}
               type="text"
               name="username"
               className="infoInput"
               placeholder="usenrame"
+              value={data.username}
             />
           </div>
           <div>
             <input
-              type="text"
+              onChange={handleChange}
+              type="password"
               className="infoInput"
               name="password"
               placeholder="password"
+              value={data.password}
             />
             {isSignUp && (
               <input
-                type="text"
+                onChange={handleChange}
+                type="password"
+                value={data.confirmpassword}
                 className="infoInput"
                 name="confirmpassword"
                 placeholder="Confirm Password"
               />
             )}
           </div>
+          <span style={{display:confirmPassword?"none":"block",color:"red",fontSize:'12px',alignSelf:"flex-end",margin:"5px"}}>
+            * Confirm Password is not same
+          </span>
           <div>
-            <span style={{ fontSize: "12px" ,cursor:"pointer"}} onClick={()=>setIsSignUp((prev)=>!prev)}>
-            { isSignUp ? "Already have an account . Login!" :"Don't Have an account? Sign Up"}
-              
+            <span
+              style={{ fontSize: "12px", cursor: "pointer" }}
+              onClick={() => {setIsSignUp((prev) => !prev);resetForm()}}
+            >
+              {isSignUp
+                ? "Already have an account . Login!"
+                : "Don't Have an account? Sign Up"}
             </span>
           </div>
           <button className="button infoButton" type="submit">
-          { isSignUp ? "Sign up" :"Log in"}
+            {isSignUp ? "Sign up" : "Log in"}
           </button>
         </form>
       </div>
@@ -94,7 +141,7 @@ function Login() {
         </div>
         <div>
           <input
-            type="text"
+            type="password"
             className="infoInput"
             name="password"
             placeholder="password"
