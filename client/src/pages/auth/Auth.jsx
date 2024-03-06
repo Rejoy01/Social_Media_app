@@ -22,18 +22,26 @@ const Auth = () => {
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
-    // console.log(data);
+    console.log(data);
   };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(data.password);
+    console.log(data.confirmpassword);
+    const password = data.password.trim();
+    const confirmPassword = data.confirmpassword.trim();
     if (isSignUp) {
-      data.password !== data.confirmpassword ? dispatch(signUp(data)) : setConfirmPassword(false)
-    }else{
-      dispatch(logIn(data))
+        if (password !== confirmPassword) {
+            setConfirmPassword(false); // or any other action you want to take
+        } else {
+            dispatch(signUp(data));
+        }
+    } else {
+        dispatch(logIn(data));
     }
-  }
+}
 
   const resetForm =()=>{
     setConfirmPassword(true)

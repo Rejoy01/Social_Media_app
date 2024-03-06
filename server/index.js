@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotevn from 'dotenv'
+import cors from "cors";
 //routes
 import AuthRoute from './Routes/AuthRoutes.js'
 import UserRoute from './Routes/UserRoutes.js'
@@ -13,6 +14,7 @@ const app = express();
 
 
 //middleware
+app.use(cors())
 app.use(bodyParser.json({limit:"30mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}))
 dotevn.config()

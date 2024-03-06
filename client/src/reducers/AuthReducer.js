@@ -14,3 +14,4 @@ const authReducer = (state = {authData : null ,loading:false , error :false},act
     }
 
 }
+export default authReducer
