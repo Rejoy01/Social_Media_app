@@ -6,10 +6,14 @@ import { logIn, signUp } from "../../actions/AuthAction.js";
 
 
 const Auth = () => {
+
   const [isSignUp, setIsSignUp] = useState(false);
 
+  // retrive loading state from redux
   const dispatch = useDispatch()
-
+// useselctor to fetch from global state
+  const loading  = useSelector((state)=>state.authReducer.loading)
+console.log(loading);
   const [data, setData] = useState({
     firstname: "",
     lastname: "",
@@ -28,8 +32,8 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data.password);
-    console.log(data.confirmpassword);
+    // console.log(data.password);
+    // console.log(data.confirmpassword);
     const password = data.password.trim();
     const confirmPassword = data.confirmpassword.trim();
     if (isSignUp) {
@@ -131,8 +135,8 @@ const Auth = () => {
                 : "Don't Have an account? Sign Up"}
             </span>
           </div>
-          <button className="button infoButton" type="submit">
-            {isSignUp ? "Sign up" : "Log in"}
+          <button className="button infoButton" type="submit" disabled={loading}>
+            {loading?"Loading...":isSignUp ? "Sign up" : "Log in"}
           </button>
         </form>
       </div>

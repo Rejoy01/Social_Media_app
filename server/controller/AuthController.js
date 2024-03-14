@@ -1,21 +1,30 @@
 import UserModel from "../model/UserModel.js";
 import bcrpyt, { compare } from "bcrypt";
+import jwt from "jsonwebtoken"
 
 // registering a new user
 export const registeruser = async (req, res) => {
-  const { username, password, firstname, lastname } = req.body;
+  // const { username, password, firstname, lastname } = req.body;
 
   const salt = await bcrpyt.genSalt(10);
-  const hashedPass = await bcrpyt.hash(password, salt);
+  const hashedPass = await bcrpyt.hash(req.body.password, salt);
+  req.body.password = hashedPass
+  
+  const newUser = new UserModel(req.body);
+  const {username} = req.body
 
-  const newUser = new UserModel({
-    username,
-    password: hashedPass,
-    firstname,
-    lastname,
-  });
+  // const newUser = new UserModel({
+  //   username,
+  //   password: hashedPass,
+  //   firstname,
+  //   lastname,
+  // });
 
   try {
+    const oldUser = await UserModel.findOne({username})
+    if (oldUser){
+      return res.status(400).json({message:"username is already registered"})
+    }
     await newUser.save();
     res.status(200).json(newUser);
   } catch (error) {
